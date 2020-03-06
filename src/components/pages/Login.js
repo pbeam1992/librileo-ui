@@ -11,7 +11,7 @@ import Button from "@material-ui/core/Button";
 
 const Login = (props) => {
     const authContext = useContext(AuthContext);
-    const {login, isAuthenticated, error, removeErrors} = authContext;
+    const {login, isAuthenticated, error} = authContext;
 
     const alertContext = useContext(AlertContext);
     const {setAlert} = alertContext;

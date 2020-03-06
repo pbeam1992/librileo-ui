@@ -3,7 +3,7 @@ import {
     SET_FORMULAR,
     GET_SERVICE_CENTER,
     LOAD_SOCIAL_BENEFIT,
-    SET_DYNAMIC_FORM_INPUT, SET_DYNAMIC_QUESTION, SET_PDF_PATH, SET_SERVICE_CENTER
+    SET_DYNAMIC_FORM_INPUT, SET_PDF_PATH
 } from '../types';
 
 export default (state, action) => {

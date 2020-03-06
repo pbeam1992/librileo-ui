@@ -1,39 +1,40 @@
-import {LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REMOVE_ERRORS, SET_USER_INFORMATION} from '../types';
+import {LOAD_MY_CONTRACT, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, SET_USER_INFORMATION, REMOVE_ERRORS} from '../types';
 
 export default (state, action) => {
     switch (action.type) {
-        case LOGIN_SUCCESS: {
+        case LOGIN_SUCCESS:
             console.log('LOGIN_SUCCESS');
             return {
                 ...state,
                 user: action.payload,
                 isAuthenticated: true
             };
-        }
-        case LOGOUT: {
+        case LOGOUT:
             return {
                 ...state,
                 user: action.payload,
                 isAuthenticated: false
             };
-        }
-        case LOGIN_FAIL: {
+        case LOGIN_FAIL:
             console.log('LOGIN_FAIL');
             return {
                 ...state,
                 isAuthenticated: false,
                 error: action.payload
-            }
-        }
-        case SET_USER_INFORMATION: {
+            };
+        case SET_USER_INFORMATION:
             return {
                 ...state,
                 user: {
                     ...state.user,
                     [action.payload.name]: action.payload.value
                 }
-            }
-        }
+            };
+        case LOAD_MY_CONTRACT:
+            return {
+                ...state,
+                myContracts: action.payload
+            };
         case REMOVE_ERRORS:
             return {
                 ...state,

@@ -3,7 +3,14 @@ import authReducer from "./authReducer";
 import AuthContext from './authContext';
 import axios from 'axios';
 
-import {LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REMOVE_ERRORS, SET_DYNAMIC_FORM_INPUT, SET_USER_INFORMATION} from '../types';
+import {
+    LOAD_MY_CONTRACT,
+    LOGIN_FAIL,
+    LOGIN_SUCCESS,
+    LOGOUT,
+    SET_USER_INFORMATION,
+    REMOVE_ERRORS
+} from '../types';
 
 const AuthState = props => {
         const initialState = {
@@ -27,7 +34,8 @@ const AuthState = props => {
                 dateOfBirth: '',
                 serviceCenterId: 0
             },
-            error: null
+            error: null,
+            myContracts: []
         };
 
         const [state, dispatch] = useReducer(authReducer, initialState);
@@ -60,6 +68,23 @@ const AuthState = props => {
             )
         };
 
+        const loadMyContracts = () => {
+            axios.get('http://stage1.pimcore.testanwendungen.de/service/antrag/by/' + state.user.id)
+                .then((res) => {
+                    dispatch({
+                        type: LOAD_MY_CONTRACT,
+                        payload: res.data
+                    })
+                });
+        };
+
+        const sendEmail = (contractId) => {
+            axios.get('http://stage1.pimcore.testanwendungen.de/service/antrag/email/' + state.user.id + "/" + contractId)
+                .then((result) => {
+                    // Success
+                });
+        };
+
         const logout = () => {
             dispatch({
                 type: LOGOUT,
@@ -80,10 +105,13 @@ const AuthState = props => {
                     isAuthenticated: state.isAuthenticated,
                     error: state.error,
                     isLoading: state.isLoading,
+                    myContracts: state.myContracts,
                     login,
                     logout,
                     setUserInformation,
-                    removeErrors
+                    removeErrors,
+                    loadMyContracts,
+                    sendEmail
                 }}
             >
                 {props.children}

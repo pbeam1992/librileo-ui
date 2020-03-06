@@ -26,7 +26,7 @@ const Home = ({classes, styles}) => {
 
     const {isAuthenticated} = authContext;
     const {questionData, dynamicQuestionAnswer, setPdf} = contractContext;
-    const {setAlert, closeAlert} = alertContext;
+    const {setAlert} = alertContext;
 
 
     const [activeStep, setActiveStep] = React.useState(0);
@@ -81,9 +81,9 @@ const Home = ({classes, styles}) => {
                 falseChildFlagCount++;
         }
 
-        if (childUndefinedCount == childrenQuestion.length ||
-            falseChildFlagCount == childrenQuestion.length ||
-            (childUndefinedCount + falseChildFlagCount == childrenQuestion.length)) {
+        if (childUndefinedCount === childrenQuestion.length ||
+            falseChildFlagCount === childrenQuestion.length ||
+            (childUndefinedCount + falseChildFlagCount === childrenQuestion.length)) {
             return false;
         } else {
             return true;
@@ -140,7 +140,7 @@ const Home = ({classes, styles}) => {
                         Back
                     </Button>
 
-                    {activeStep != 1 &&
+                    {activeStep !== 1 &&
                     <Button
                         variant="contained"
                         color="primary"
@@ -155,6 +155,6 @@ const Home = ({classes, styles}) => {
         </React.Fragment>
 
     )
-}
+};
 
 export default Home;

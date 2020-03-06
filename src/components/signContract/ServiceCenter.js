@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect} from "react";
 import AuthContext from '../../context/auth/authContext';
 import ContractContext from '../../context/contract/contractContext';
 import List from "@material-ui/core/List";
@@ -55,6 +55,6 @@ const ServiceCenter = props => {
 
         </Grid>
     );
-}
+};
 
 export default ServiceCenter;

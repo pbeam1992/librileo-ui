@@ -1,4 +1,4 @@
-import React, {useContext, useReducer, useState} from "react";
+import React, {useContext, useReducer} from "react";
 import ContractContext from './contractContext';
 import AuthContext from '../auth/authContext';
 import axios from 'axios';
@@ -7,11 +7,8 @@ import {
     GET_SERVICE_CENTER,
     LOAD_SOCIAL_BENEFIT,
     SET_DYNAMIC_FORM_INPUT,
-    SET_DYNAMIC_QUESTION,
     SET_FORMULAR,
-    SET_PDF_PATH,
-    SET_SERVICE_CENTER,
-    SET_USER_INFORMATION
+    SET_PDF_PATH
 } from '../types';
 import contractReducer from "./contractReducer";
 
