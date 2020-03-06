@@ -1,4 +1,12 @@
-import {LOAD_MY_CONTRACT, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, SET_USER_INFORMATION, REMOVE_ERRORS} from '../types';
+import {
+    LOAD_MY_CONTRACT,
+    LOGIN_FAIL,
+    LOGIN_SUCCESS,
+    LOGOUT,
+    SET_USER_INFORMATION,
+    REMOVE_ERRORS,
+    SET_REGISTER_INFORMATION
+} from '../types';
 
 export default (state, action) => {
     switch (action.type) {
@@ -30,6 +38,14 @@ export default (state, action) => {
                     [action.payload.name]: action.payload.value
                 }
             };
+        case SET_REGISTER_INFORMATION:
+            return {
+                ...state,
+                registerUser: {
+                    ...state.registerUser,
+                    [action.payload.name]: action.payload.value
+                }
+            };
         case LOAD_MY_CONTRACT:
             return {
                 ...state,
@@ -39,7 +55,7 @@ export default (state, action) => {
             return {
                 ...state,
                 error: null
-            }
+            };
         default:
             return state;
     }

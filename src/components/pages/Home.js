@@ -24,7 +24,7 @@ const Home = ({classes, styles}) => {
     const contractContext = useContext(ContractContext);
     const alertContext = useContext(AlertContext);
 
-    const {isAuthenticated} = authContext;
+    const {isAuthenticated, registerUser, register} = authContext;
     const {questionData, dynamicQuestionAnswer, setPdf} = contractContext;
     const {setAlert} = alertContext;
 
@@ -56,14 +56,21 @@ const Home = ({classes, styles}) => {
         if (e !== undefined)
             e.preventDefault();
 
-        if (activeStep === 2)
+        if (activeStep === 0 && registerUser.email !== '') {
+            await register();
+            nextStep();
+        } else if (activeStep === 2)
             if (isChildInformed()) {
                 await setPdf();
-                setActiveStep(prevActiveStep => prevActiveStep + 1);
+                nextStep();
             } else
                 setAlert('Warning', 'Please inform at least one child');
         else
-            setActiveStep(prevActiveStep => prevActiveStep + 1);
+            nextStep();
+    };
+
+    const nextStep = () => {
+        setActiveStep(prevActiveStep => prevActiveStep + 1);
     };
 
     const handleBack = () => {
@@ -99,20 +106,19 @@ const Home = ({classes, styles}) => {
             {!isAuthenticated &&
             <Card style={{paddingTop: 35}}>
                 <CardContent>
-                    <Typography className={classes.title} color="textPrimary" gutterBottom>
-                        <WarningIcon/> The system will create a new contract with new user registration. If you are
-                        already have an account
-                        please <Link to='/login'> go to login.</Link>
-                    </Typography>
+                    <Grid container justify='flex-start' alignItems='center'>
+                        <WarningIcon color='secondary'/>
+                        <Typography className={classes.title} color="textPrimary">
+                            The system will create a new contract with new user registration. If you are
+                            already have an account
+                            please <Link to='/login'> go to login.</Link>
+                        </Typography>
+                    </Grid>
                 </CardContent>
             </Card>
             }
             <Paper className={classes.paper}>
                 <Grid container>
-                    <Grid item xs={12}>
-                        {!isAuthenticated &&
-                        <RegisterForm/>}
-                    </Grid>
                     <Grid item xs={12}>
                         <Typography component="h1" variant="h4" align="center" style={{marginTop: 40}}>
                             Sign a contract
@@ -137,7 +143,15 @@ const Home = ({classes, styles}) => {
                 </Grid>
 
                 <form onSubmit={handleNext}>
-                    {getStepContent(activeStep)}
+                    <Grid container spacing={4}>
+                        <Grid item xs={12}>
+                            {!isAuthenticated &&
+                            <RegisterForm/>}
+                        </Grid>
+                        <Grid item xs={12}>
+                            {getStepContent(activeStep)}
+                        </Grid>
+                    </Grid>
 
                     <div>
                         <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>

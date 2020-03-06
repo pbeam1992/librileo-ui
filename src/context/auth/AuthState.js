@@ -9,7 +9,7 @@ import {
     LOGIN_SUCCESS,
     LOGOUT,
     SET_USER_INFORMATION,
-    REMOVE_ERRORS
+    REMOVE_ERRORS, SET_REGISTER_INFORMATION
 } from '../types';
 
 const AuthState = props => {
@@ -19,8 +19,6 @@ const AuthState = props => {
             user: {
                 id: null,
                 email: '',
-                password: '',
-                confirmPassword: '',
                 title: '',
                 lastname: '',
                 firstname: '',
@@ -33,6 +31,11 @@ const AuthState = props => {
                 socialBenefitId: 15750,
                 dateOfBirth: '',
                 serviceCenterId: 0
+            },
+            registerUser: {
+                email: '',
+                password: '',
+                confirmPassword: ''
             },
             error: null,
             myContracts: []
@@ -58,9 +61,37 @@ const AuthState = props => {
                 });
         };
 
+        const register = async () => {
+            let data = {
+                user: state.user,
+                registerUser: state.registerUser
+            };
+
+            axios.post('http://stage1.pimcore.testanwendungen.de/service/user/create', data)
+                .then((res) => {
+                    dispatch({
+                        type: LOGIN_SUCCESS,
+                        payload: res.data
+                    })
+                })
+                .catch((errors) => {
+                    console.log(errors);
+                });
+        };
+
         const setUserInformation = (name, value) => {
             dispatch({
                     type: SET_USER_INFORMATION,
+                    payload: {
+                        name, value
+                    }
+                }
+            )
+        };
+
+        const setRegisterInformation = (name, value) => {
+            dispatch({
+                    type: SET_REGISTER_INFORMATION,
                     payload: {
                         name, value
                     }
@@ -106,12 +137,15 @@ const AuthState = props => {
                     error: state.error,
                     isLoading: state.isLoading,
                     myContracts: state.myContracts,
+                    registerUser: state.registerUser,
                     login,
                     logout,
                     setUserInformation,
                     removeErrors,
                     loadMyContracts,
-                    sendEmail
+                    sendEmail,
+                    setRegisterInformation,
+                    register
                 }}
             >
                 {props.children}
