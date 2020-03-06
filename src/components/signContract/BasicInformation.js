@@ -13,6 +13,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 // Context
 import ContractContext from '../../context/contract/contractContext';
 import AuthContext from '../../context/auth/authContext';
+import Button from "@material-ui/core/Button";
 
 const BasicInformation = props => {
 
@@ -56,11 +57,11 @@ const BasicInformation = props => {
                 />
             </Grid>
             <Grid item xs={12} lg={6}>
-                <TextField label="Nachname" name='lastname' value={lastname} onChange={inputChange}
-                           fullWidth required/>
+                <TextField required label="Nachname" name='lastname' value={lastname} onChange={inputChange}
+                           fullWidth />
             </Grid>
             <Grid item xs={12} lg={6}>
-                <TextField label="Vorname" name='firstname' value={firstname} onChange={inputChange} fullWidth/>
+                <TextField required label="Vorname" name='firstname' value={firstname} onChange={inputChange} fullWidth/>
             </Grid>
             <Grid item xs={12} lg={6}>
                 <TextField label="Geburtsname" fullWidth/>
@@ -80,7 +81,7 @@ const BasicInformation = props => {
                 <TextField label="Hausnummer" fullWidth/>
             </Grid>
             <Grid item xs={12} lg={4}>
-                <TextField label="PLZ" name='postcode' value={postcode} onChange={inputChange} fullWidth/>
+                <TextField required label="PLZ" name='postcode' value={postcode} onChange={inputChange} fullWidth/>
             </Grid>
             <Grid item xs={12} lg={4}>
                 <TextField label="Ort" fullWidth/>
@@ -94,6 +95,7 @@ const BasicInformation = props => {
                     name='socialBenefitId'
                     value={socialBenefitId}
                     onChange={inputChange}
+                    required
                 >
                     {socialBenefits.map(item => {
                         return <MenuItem key={item.id} value={item.id}>{item.key}</MenuItem>
@@ -101,7 +103,6 @@ const BasicInformation = props => {
                 </Select>
             </Grid>
         </Grid>
-
     )
 };
 
