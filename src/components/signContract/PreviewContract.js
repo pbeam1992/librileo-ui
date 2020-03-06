@@ -10,7 +10,7 @@ const PreviewContract = props => {
 
     return (
         <React.Fragment>
-            {previewPath && <iframe src={previewPath} className='iframe-preview' style={{height: 600}}/>}
+            {previewPath && <iframe title={'preview'} src={previewPath} className='iframe-preview' style={{height: 600}}/>}
         </React.Fragment>
     )
 };

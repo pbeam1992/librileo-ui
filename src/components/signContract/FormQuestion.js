@@ -2,8 +2,8 @@ import React, {useContext, useEffect} from "react";
 
 // Context
 import ContractContext from '../../context/contract/contractContext';
-import AuthContext from '../../context/auth/authContext';
 import {TextField} from "@material-ui/core";
+
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -15,13 +15,10 @@ import Grid from "@material-ui/core/Grid";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import Checkbox from "@material-ui/core/Checkbox";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
     formControl: {
@@ -32,10 +29,8 @@ const useStyles = makeStyles(theme => ({
 const FormQuestion = props => {
     const classes = useStyles();
     const contractContext = useContext(ContractContext);
-    const authContext = useContext(AuthContext);
 
     const {getQuestions, questionData, formId, setDynamicFormInput, dynamicQuestionAnswer} = contractContext;
-    const {user} = authContext;
 
     useEffect(() => {
         getQuestions(formId);
@@ -200,9 +195,8 @@ const FormQuestion = props => {
                         return renderBoolean(question);
                     else if (question.className === 'QuestionChild')
                         return renderChild(question);
-                    // else
-                    //     return <p>This message will appear when question data is not correctly.
-                    //         (Message: {question.className} )</p>
+                    else
+                        return null;
                 })}
 
             </Grid>

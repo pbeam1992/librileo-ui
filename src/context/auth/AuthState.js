@@ -8,7 +8,6 @@ import {
     LOGIN_FAIL,
     LOGIN_SUCCESS,
     LOGOUT,
-    SET_DYNAMIC_FORM_INPUT,
     SET_USER_INFORMATION
 } from '../types';
 
