@@ -11,7 +11,7 @@ import Button from "@material-ui/core/Button";
 
 const Login = (props) => {
     const authContext = useContext(AuthContext);
-    const {login, isAuthenticated, error} = authContext;
+    const {login, isAuthenticated, error, removeErrors} = authContext;
 
     const alertContext = useContext(AlertContext);
     const {setAlert} = alertContext;
@@ -22,12 +22,11 @@ const Login = (props) => {
     });
 
     useEffect(() => {
-
         if (error !== null) {
             console.log('Is in error function');
-            setAlert('Title', 'Message');
+            setAlert('Login failed', 'Please check email and password!');
         }
-    }, [error, setAlert]);
+    }, [error]);
 
     const {email, password} = user;
 
@@ -38,12 +37,10 @@ const Login = (props) => {
 
         const hashPassword = md5(password);
         login({email, password: hashPassword});
-        setAlert('Title', 'Message');
     };
 
     if (isAuthenticated)
         return <Redirect to={'/'}/>;
-
 
     return (
         <React.Fragment>

@@ -1,4 +1,4 @@
-import {LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, SET_USER_INFORMATION} from '../types';
+import {LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REMOVE_ERRORS, SET_USER_INFORMATION} from '../types';
 
 export default (state, action) => {
     switch (action.type) {
@@ -34,6 +34,11 @@ export default (state, action) => {
                 }
             }
         }
+        case REMOVE_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
         default:
             return state;
     }

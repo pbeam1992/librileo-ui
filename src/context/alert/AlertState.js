@@ -1,7 +1,8 @@
-import React, {useReducer} from "react";
+import React, {useContext, useReducer} from "react";
 import alertReducer from "./alertReducer";
 import AlertContext from './alertContext';
 import {REMOVE_ALERT, SET_ALERT} from "../types";
+import AuthContext from '../auth/authContext';
 
 const AlertState = props => {
     const initialState = {
@@ -11,6 +12,9 @@ const AlertState = props => {
     };
 
     const [state, dispatch] = useReducer(alertReducer, initialState);
+
+    const authContext = useContext(AuthContext);
+    const { removeErrors} = authContext;
 
     // Set Alert
     const setAlert = (title, message) => {
@@ -24,8 +28,9 @@ const AlertState = props => {
     const closeAlert = () => {
         dispatch({
             type: REMOVE_ALERT
-        })
-    }
+        });
+        removeErrors();
+    };
 
     return (
         <AlertContext.Provider

@@ -3,7 +3,7 @@ import authReducer from "./authReducer";
 import AuthContext from './authContext';
 import axios from 'axios';
 
-import {LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, SET_DYNAMIC_FORM_INPUT, SET_USER_INFORMATION} from '../types';
+import {LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REMOVE_ERRORS, SET_DYNAMIC_FORM_INPUT, SET_USER_INFORMATION} from '../types';
 
 const AuthState = props => {
         const initialState = {
@@ -67,6 +67,12 @@ const AuthState = props => {
             })
         };
 
+        const removeErrors = () => {
+            dispatch({
+                type: REMOVE_ERRORS
+            })
+        };
+
         return (
             <AuthContext.Provider
                 value={{
@@ -76,7 +82,8 @@ const AuthState = props => {
                     isLoading: state.isLoading,
                     login,
                     logout,
-                    setUserInformation
+                    setUserInformation,
+                    removeErrors
                 }}
             >
                 {props.children}
