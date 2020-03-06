@@ -15,6 +15,7 @@ import AlertState from "./context/alert/AlertState";
 import Navbar from "./components/layout/Navbar";
 import ContractState from "./context/contract/ContractState";
 import Alerts from "./components/layout/Alerts";
+import MyContract from "./components/user/MyContract";
 
 const App = () => {
     const classes = useStyles();
@@ -32,6 +33,7 @@ const App = () => {
                                     <Home classes={classes} />
                                 </Route>
                                 <Route exact path='/login' component={Login}/>
+                                <Route exact path='/myContracts' component={MyContract}/>
                             </Switch>
                         </main>
                     </Router>
