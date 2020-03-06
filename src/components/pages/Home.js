@@ -52,7 +52,10 @@ const Home = ({classes, styles}) => {
         }
     };
 
-    const handleNext = async () => {
+    const handleNext = async e => {
+        if (e !== undefined)
+            e.preventDefault();
+
         if (activeStep === 2)
             if (isChildInformed()) {
                 await setPdf();
@@ -133,27 +136,29 @@ const Home = ({classes, styles}) => {
                     </Grid>
                 </Grid>
 
-                {getStepContent(activeStep)}
+                <form onSubmit={handleNext}>
+                    {getStepContent(activeStep)}
 
-                <div>
-                    <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                        Back
-                    </Button>
+                    <div>
+                        <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                            Back
+                        </Button>
 
-                    {activeStep !== 1 &&
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNext}
-                        className={classes.button}
-                    >
-                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                    </Button>
-                    }
-                </div>
+                        {activeStep != 1 &&
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type='submit'
+                            // onClick={handleNext}
+                            className={classes.button}
+                        >
+                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                        </Button>
+                        }
+                    </div>
+                </form>
             </Paper>
         </React.Fragment>
-
     )
 };
 

@@ -53,13 +53,17 @@ const FormQuestion = props => {
                 <FormControl key={question.id} fullWidth>
                     <InputLabel shrink id={question.label}>{question.label}</InputLabel>
                     <Select
+                        required
                         labelId={question.label}
                         id={question.id.toString()}
                         name={question.id.toString()}
-                        value={dynamicQuestionAnswer[question.id] ? dynamicQuestionAnswer[question.id] : ''}
+                        value={dynamicQuestionAnswer[question.id] ? dynamicQuestionAnswer[question.id] : 0}
                         onChange={handleChange}
                         fullWidth
                     >
+                        <MenuItem value={0}>
+                            <em>Please select</em>
+                        </MenuItem>
                         {
                             question.childs.map((child) =>
                                 <MenuItem key={child.id} value={child.id}>{child.label}</MenuItem>)
@@ -102,7 +106,8 @@ const FormQuestion = props => {
                            name={question.id.toString()}
                            value={dynamicQuestionAnswer[question.id] ? dynamicQuestionAnswer[question.id] : ''}
                            onChange={handleChange}
-                           fullWidth/>
+                           fullWidth
+                           required/>
             </Grid>
         )
     };
@@ -120,6 +125,7 @@ const FormQuestion = props => {
                     InputLabelProps={{
                         shrink: true,
                     }}
+                    required
                 />
             </Grid>
         );
@@ -130,6 +136,7 @@ const FormQuestion = props => {
             <Grid item xs={12}>
                 <FormLabel component="legend">{question.label}</FormLabel>
                 <RadioGroup
+                    required
                     aria-label="gender"
                     name={question.id.toString()}
                     value={dynamicQuestionAnswer[question.id] ? dynamicQuestionAnswer[question.id] : ''}
