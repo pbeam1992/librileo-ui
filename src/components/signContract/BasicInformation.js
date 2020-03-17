@@ -40,8 +40,8 @@ const BasicInformation = props => {
             <Grid item xs={12} lg={6}>
                 <FormLabel component="legend">Gender</FormLabel>
                 <RadioGroup aria-label="gender" name="title" value={title} onChange={inputChange}>
-                    <FormControlLabel value="mr" control={<Radio/>} label="Mr."/>
-                    <FormControlLabel value="mrs" control={<Radio/>} label="Mrs."/>
+                    <FormControlLabel value="Sir" control={<Radio/>} label="Herr"/>
+                    <FormControlLabel value="Madam" control={<Radio/>} label="Frau"/>
                 </RadioGroup>
             </Grid>
             <Grid item xs={12} lg={6}>

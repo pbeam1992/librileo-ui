@@ -158,7 +158,7 @@ const Home = ({classes, styles}) => {
                             Back
                         </Button>
 
-                        {activeStep != 1 &&
+                        {activeStep !== 1 &&
                         <Button
                             variant="contained"
                             color="primary"
